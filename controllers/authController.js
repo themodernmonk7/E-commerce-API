@@ -22,7 +22,24 @@ const register = async (req, res) => {
 
 // Login User
 const login = async (req, res) => {
-  res.send("Login user")
+  const { email, password } = req.body
+  if (!email || !password) {
+    throw new CustomError.BadRequestError("Please provide email and password")
+  }
+  const user = await User.findOne({ email })
+  if (!user) {
+    throw CustomError.UnauthorizedError("No user found")
+  }
+  const isPasswordCorrect = await user.comparePassword(password)
+  if (!isPasswordCorrect) {
+    throw new CustomError.UnauthenticatedError("Invalid Credentials")
+  }
+  const tokenUser = createTokenUser(user)
+  attachCookiesToResponse({ res, user: tokenUser })
+  res
+    .status(StatusCodes.OK)
+    .json({ user: tokenUser, msg: "Login successfull!" })
+
 }
 
 // Logout User
