@@ -11,6 +11,7 @@ const cookieParser = require("cookie-parser")
 const connectDB = require("./db/connect")
 // Requrie Routers
 const authRouter = require("./routes/authRoutes")
+const userRouter = require("./routes/userRoutes")
 // Require Middlewares
 const notFoundMiddleware = require("./middleware/not-found")
 const errorHandlerMiddleware = require("./middleware/error-handler")
@@ -26,12 +27,15 @@ app.get("/", (req, res) => {
 })
 
 // Testing route
-// app.get("/api/v1/", (req, res) => {
-//   console.log(req.signedCookies)
-//   res.send("Ecommerce API")
-// })
+app.get("/api/v1/", (req, res) => {
+  console.log(req.cookies)
+  console.log(req.signedCookies)
+  res.send("Ecommerce API")
+})
+
 // Invoke Routers
 app.use("/api/v1/auth", authRouter)
+app.use("/api/v1/users", userRouter)
 // Invoke Middlewares
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

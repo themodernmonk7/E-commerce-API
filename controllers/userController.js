@@ -11,7 +11,12 @@ const getAllUsers = async (req, res) => {
 
 // Get single user
 const getSingleUser = async (req, res) => {
-  res.send("Get single user")
+  const { id: userId } = req.params
+  const user = await User.findOne({ _id: userId }).select("-password")
+  if (!user) {
+    throw CustomError.NotFoundError("User does not exitst")
+  }
+  res.status(StatusCodes.OK).json({ user })
 }
 
 // Show current user
@@ -20,7 +25,7 @@ const showCurrentUser = async (req, res) => {
 }
 
 // Update user
-const updateUser = async (req, res) => {
+const updateUser = (req, res) => {
   res.send("Update user")
 }
 

@@ -39,17 +39,25 @@ const login = async (req, res) => {
   res
     .status(StatusCodes.OK)
     .json({ user: tokenUser, msg: "Login successfull!" })
-
 }
 
 // Logout User
 const logout = async (req, res) => {
-  res.cookie("token", null, {
+  res.cookie("token", "logout", {
     httpOnly: true,
     expires: new Date(Date.now()),
   })
-  res.send()
+  //   res.send() ==== this is for production
+  res.status(StatusCodes.OK).json({ msg: "user logged out!" }) // this is for testing during developement
 }
+
+// const logout = async (req, res) => {
+//   res.cookie("token", "no token", {
+//     httpOnly: true,
+//     expires: new Date(Date.now()),
+//   })
+//   res.send()
+// }
 
 module.exports = {
   register,
