@@ -43,7 +43,7 @@ const login = async (req, res) => {
 
 // Logout User
 const logout = async (req, res) => {
-  res.cookie("token", "logout", {
+  res.cookie("token", null, {
     httpOnly: true,
     expires: new Date(Date.now()),
   })

@@ -28,8 +28,8 @@ app.get("/", (req, res) => {
 
 // Testing route
 app.get("/api/v1/", (req, res) => {
-  console.log(req.cookies)
-  console.log(req.signedCookies)
+  // console.log(req.cookies)
+  // console.log(req.signedCookies)
   res.send("Ecommerce API")
 })
 
