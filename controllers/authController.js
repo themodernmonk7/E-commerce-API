@@ -5,7 +5,7 @@ const { createTokenUser, attachCookiesToResponse } = require("../utils")
 
 // Register User
 const register = async (req, res) => {
-  const { email, name, password } = req.body
+  const { name, email, password } = req.body
   const emailAlreadyExists = await User.findOne({ email })
   if (emailAlreadyExists) {
     throw new CustomError.BadRequestError("Email already exists")
@@ -13,7 +13,7 @@ const register = async (req, res) => {
   // Add first registered user as admin
   const isFirstAccount = (await User.countDocuments({})) === 0
   const role = isFirstAccount ? "admin" : "user"
-  const user = await User.create({ email, name, password, role })
+  const user = await User.create({ name, email, password, role })
   // Create token user
   const tokenUser = createTokenUser(user)
   attachCookiesToResponse({ res, user: tokenUser })
