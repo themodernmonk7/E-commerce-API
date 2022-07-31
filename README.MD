@@ -15,3 +15,4 @@ This method returns 0 for empty collection or if the given collection is not pre
 In this method, you are not allowed to use $where, $near, and $nearSphere operators as a part of the query expressions. 
 
 <!-- ? REST Operator -->
+The rest parameter syntax allows a function to accept an indefinite number of arguments as an array.
