@@ -13,3 +13,5 @@ This method does not use metadata to return the count. It performs aggregation o
 You are allowed to use this method in multi-document transactions.
 This method returns 0 for empty collection or if the given collection is not present in the database.
 In this method, you are not allowed to use $where, $near, and $nearSphere operators as a part of the query expressions. 
+
+<!-- ? REST Operator -->
