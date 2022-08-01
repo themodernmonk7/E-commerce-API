@@ -13,6 +13,7 @@ const getAllUsers = async (req, res) => {
   const user = await User.find({ role: "user" }).select("-password")
   res.status(StatusCodes.OK).json({ total_users: user.length, user })
 }
+
 //** ======================== Get single user ========================
 const getSingleUser = async (req, res) => {
   const { id: userId } = req.params
@@ -44,6 +45,7 @@ const updateUser = async (req, res) => {
   attachCookiesToResponse({ res, user: tokenUser })
   res.status(StatusCodes.OK).json({ user: tokenUser })
 }
+
 //** ======================== Update user password ========================
 const updateUserPassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body
