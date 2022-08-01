@@ -9,7 +9,6 @@ const getAllUsers = async (req, res) => {
   const user = await User.find({ role: "user" }).select("-password")
   res.status(StatusCodes.OK).json({ total_users: user.length, user })
 }
-
 //** ======================== Get single user ========================
 const getSingleUser = async (req, res) => {
   const { id: userId } = req.params
@@ -22,14 +21,24 @@ const getSingleUser = async (req, res) => {
 
 //** ======================== Show current user ========================
 const showCurrentUser = async (req, res) => {
-  res.status(StatusCodes.OK).json({user: req.user})
+  res.status(StatusCodes.OK).json({ user: req.user })
 }
 
 //** ======================== Update user ========================
-const updateUser = (req, res) => {
-  res.send("Update user")
-}
+const updateUser = async (req, res) => {
+  const { name, email } = req.body
+  if (!name || !email) {
+    throw new CustomError.BadRequestError("Please provide value")
+  }
+  const user = await User.findOne({ _id: req.user.userId })
 
+  user.name = name
+  user.email = email
+  await user.save()
+  const tokenUser = createTokenUser(user)
+  attachCookiesToResponse({ res, user: tokenUser })
+  res.status(StatusCodes.OK).json({ user: tokenUser })
+}
 //** ======================== Update user password ========================
 const updateUserPassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body
