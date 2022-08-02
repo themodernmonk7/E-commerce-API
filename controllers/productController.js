@@ -69,7 +69,7 @@ const uploadImage = async (req, res) => {
   )
   await productImage.mv(imagePath)
   res.status(StatusCodes.OK).json({ image: `/uploads/${productImage.name}` })
-}
+} 
 
 module.exports = {
   createProduct,
