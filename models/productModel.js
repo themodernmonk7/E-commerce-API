@@ -91,4 +91,9 @@ ProductSchema.virtual("reviews", {
   // match: {rating: 5} // Get the reviews whose rating is only 5.
 })
 
+ProductSchema.pre("remove", async function (next) {
+  // Go to 'Reveiw; and delete all the review that are associated with this particular product
+  await this.model("Review").deleteMany({ product: this._id })
+})
+
 module.exports = new mongoose.model("Product", ProductSchema)
