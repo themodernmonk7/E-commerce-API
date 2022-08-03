@@ -79,7 +79,16 @@ const ProductSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 )
+
+// If I want to search single product, in tha product I also want to have all reviews associated with that product.
+ProductSchema.virtual("reviews", {
+  ref: "Review",
+  localField: "_id",
+  foreignField: "product",
+  justOne: false,
+  // match: {rating: 5} // Get the reviews whose rating is only 5.
+})
 
 module.exports = new mongoose.model("Product", ProductSchema)

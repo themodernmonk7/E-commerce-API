@@ -14,5 +14,12 @@ You are allowed to use this method in multi-document transactions.
 This method returns 0 for empty collection or if the given collection is not present in the database.
 In this method, you are not allowed to use $where, $near, and $nearSphere operators as a part of the query expressions. 
 
-<!-- ? REST Operator -->
+REST Operator 
 The rest parameter syntax allows a function to accept an indefinite number of arguments as an array.
+
+.populate
+It allows us to reference documents in other collections.
+With the help of populate, we could get specific info about the product when reqesting all reviews.
+
+mongoose virtuals.
+In Mongoose, a virtual is a property that is not stored in MongoDB. Virtuals are typically used for computed properties on documents.

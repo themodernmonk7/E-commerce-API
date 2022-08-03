@@ -30,7 +30,10 @@ const createReview = async (req, res) => {
 
 // ** ===================  GET ALL REVIEWS  ===================
 const getAllReviews = async (req, res) => {
-  const review = await Review.find({})
+  const review = await Review.find({}).populate({
+    path: "product",
+    select: "name company, price",
+  })
   res.status(StatusCodes.OK).json({ total_review: review.length, review })
 }
 
@@ -75,10 +78,18 @@ const deleteReview = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "Success! Review has been deleted" })
 }
 
+// ** =================== GET SINGLE PRODUCT REVIEW  ===================
+const getSingleProductReviews = async (req, res) => {
+  const { id: productId } = req.params
+  const reviews = await Review.find({ product: productId })
+  res.status(StatusCodes.OK).json({ total_reviews: reviews.length, reviews })
+}
+
 module.exports = {
   createReview,
   getAllReviews,
   getSingleReview,
   udpateReview,
   deleteReview,
+  getSingleProductReviews,
 }
