@@ -18,7 +18,7 @@ const ReviewSchema = new mongoose.Schema(
 
     comment: {
       type: String,
-      required: [true, "Please proivde review text"],
+      required: [true, "Please provide review text"],
     },
 
     user: {

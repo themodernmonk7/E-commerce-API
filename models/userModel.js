@@ -13,10 +13,10 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
-    required: [true, "Please provdie email"],
+    required: [true, "Please provide email"],
     // Custom Validators package
     validate: {
-      // validator packapge
+      // validator package
       validator: validator.isEmail,
       message: "Please provide valid email",
     },
@@ -37,15 +37,15 @@ const UserSchema = new mongoose.Schema({
 UserSchema.pre("save", async function () {
   // console.log(this.modifiedPaths());
   // console.log(this.isModified("name"));
-  // Only run this 👇 function if password was moddified (not on other update functions)
+  // Only run this 👇 function if password was modified (not on other update functions)
   if (!this.isModified("password")) return
   const salt = await bcrypt.genSalt(10)
   this.password = await bcrypt.hash(this.password, salt)
 })
 
 // Compare password
-UserSchema.methods.comparePassword = async function (canditatePassword) {
-  const isMatch = await bcrypt.compare(canditatePassword, this.password)
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  const isMatch = await bcrypt.compare(candidatePassword, this.password)
   return isMatch
 } 
 

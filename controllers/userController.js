@@ -19,7 +19,7 @@ const getSingleUser = async (req, res) => {
   const { id: userId } = req.params
   const user = await User.findOne({ _id: userId }).select("-password")
   if (!user) {
-    throw CustomError.NotFoundError("User does not exitst")
+    throw CustomError.NotFoundError("User does not exist")
   }
   checkPermissions(req.user, user._id)
   res.status(StatusCodes.OK).json({ user })

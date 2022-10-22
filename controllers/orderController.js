@@ -20,7 +20,7 @@ const createOrder = async (req, res) => {
 
 // ** ===================  UPDATE ORDER  ===================
 const updateOrder = async (req, res) => {
-  res.send("Uddate order")
+  res.send("Update order")
 }
 
 module.exports = {

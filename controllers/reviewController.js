@@ -13,7 +13,7 @@ const createReview = async (req, res) => {
   if (!isValidProduct) {
     throw new CustomError.NotFoundError(`No product with id: ${productId}`)
   }
-  // check if user is already submited review for this product or not
+  // check if user is already submitted the review for this product or not
   const alreadySubmittedReview = await Review.findOne({
     product: productId,
     user: req.user.userId,
@@ -48,7 +48,7 @@ const getSingleReview = async (req, res) => {
 }
 
 // ** ===================  UPDATE REVIEW  ===================
-const udpateReview = async (req, res) => {
+const updateReview = async (req, res) => {
   const { id: reviewId } = req.params
   const { rating, title, comment } = req.body
   // Check if review exists or not
@@ -89,7 +89,7 @@ module.exports = {
   createReview,
   getAllReviews,
   getSingleReview,
-  udpateReview,
+  updateReview,
   deleteReview,
   getSingleProductReviews,
 }

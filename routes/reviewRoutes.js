@@ -5,7 +5,7 @@ const {
   createReview,
   getAllReviews,
   getSingleReview,
-  udpateReview,
+  updateReview,
   deleteReview,
 } = require("../controllers/reviewController")
 
@@ -16,7 +16,7 @@ router.route("/").post(authenticateUser, createReview).get(getAllReviews)
 router
   .route("/:id")
   .get(getSingleReview)
-  .patch(authenticateUser, udpateReview)
+  .patch(authenticateUser, updateReview)
   .delete(authenticateUser, deleteReview)
 
 module.exports = router

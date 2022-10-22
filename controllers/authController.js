@@ -36,9 +36,7 @@ const login = async (req, res) => {
   }
   const tokenUser = createTokenUser(user)
   attachCookiesToResponse({ res, user: tokenUser })
-  res
-    .status(StatusCodes.OK)
-    .json({ user: tokenUser, msg: "Login successfull!" })
+  res.status(StatusCodes.OK).json({ user: tokenUser, msg: "Login successful!" })
 }
 
 // Logout User
@@ -48,7 +46,7 @@ const logout = async (req, res) => {
     expires: new Date(Date.now()),
   })
   //   res.send() ==== this is for production
-  res.status(StatusCodes.OK).json({ msg: "user logged out!" }) // this is for testing during developement
+  res.status(StatusCodes.OK).json({ msg: "user logged out!" }) // this is for testing during development
 }
 
 // const logout = async (req, res) => {
